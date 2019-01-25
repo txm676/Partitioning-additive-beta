@@ -4,6 +4,7 @@ library(ggplot2)
 library(gridExtra)
 library(vegan)
 library(BAT)
+library(GGally)
 
 ###############################################
 #####Main Diversity Partitioning Function##############
@@ -24,8 +25,8 @@ betD <- function(dat){
   betA <- gam - alp
   
   #Chao standardisation
-  betAJ <- betA / ((1 - (1/N)) * gam) #jaccard
-  betAS <- betA / ((N - 1) * alp) #sorensen
+  betAJ <- betA / ((1 - (1/N)) * gam) 
+  betAS <- betA / ((N - 1) * alp) 
   
   ###nestedness component
   maxS <- max(sp)
@@ -57,3 +58,45 @@ betD <- function(dat){
   return(ov_res)
 }#eo function
 
+
+
+
+
+##############################################################
+#############Function run betD across all datasets#############
+#############and return the results and Correlations###########
+##############################################################
+
+##returns a list: first element is results matrix with beta values,
+##second element is the correlation table (tau and P value)
+
+get_beta <- function(ldf, rn = NULL, cor_method = "kendall"){
+  
+  resM <- matrix(nrow = length(ldf), ncol = 18)
+  
+  rownames(resM) <- rn
+  
+  
+  colnames(resM) <-   c("BTotal", "BNes", "BRpl", 
+                        "BMult", "BSor", "BSIM", "BNesBaselga", "NODF_Overall", 
+                        "NODF_Rows", "NODF_Cols", "BSA", "BSJ", "Bjac", "JacSim",
+                        "JacNes", "CarvTot", "CarvRplc", "CarvRich")
+  
+  for (i in 1:length(ldf)){
+    resM[i, 1:20] <- betD(ldf[[i]])
+  }
+  
+  resM <- as.data.frame(resM)
+  
+  ##look at correlations
+  c1 <- cor.test(resM$BNes, resM$BNesBaselga, method = cor_method)
+  c2 <- cor.test(resM$BNes, resM$NODF_Overall, method = cor_method)
+  c3 <- cor.test(resM$BRpl, resM$BSor, method = cor_method)
+  c4 <- cor.test(resM$BRpl, resM$BSIM, method = cor_method)
+  c5 <- cor.test(resM$BSJ, resM$BSor, method = cor_method)#this is the standardised one we use in the paper
+  cAll <- list(c1, c2, c3, c4, c5)
+  
+  rv <- vapply(cAll, function(x) c(x$estimate, x$p.value), FUN.VALUE = numeric(2))
+  resAll <- list(resM, rv)
+  return(resAll)
+}
