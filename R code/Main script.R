@@ -8,7 +8,7 @@ source("//Source_code.R") #load in the source code file
 load()
 
 ##run main function for all datasets
-resAll <- get_beta(ldf, rn = c(fileNames, fileNames2), method = "kendall")
+resAll <- get_beta(ldf, rn = c(fileNames, fileNames2), cor_method = "kendall")
 resM <- resAll[[1]] 
 resC <- resAll[[2]] %>% round(2) ##correlation results
 
