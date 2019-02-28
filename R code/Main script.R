@@ -18,7 +18,7 @@ resM[, c(1:4)] <- apply(resM[, c(1:4)], 2, function(x) log(x + 0.1))
 #correlation text
 t1 <- "Kendall’s tau = -0.11"
 t2 <- "Kendall’s tau = 0.43"
-t3 <- "Kendall’s tau = 0.59"
+t3 <- "Kendall’s tau = 0.56"
 
 
 ##Make Figure 2 in the papers
@@ -29,14 +29,14 @@ g1 <- ggplot(data=resM,aes(x=resM$BNes,y=resM$NODF_Overall))+ geom_point() +
         plot.title = element_text(size = 16)) 
 
 g1b <- ggplot(data=resM,aes(x=resM$BRpl,y=resM$BSIM))+ geom_point()+
-  xlab(expression("Log("*beta[Replacement]*")")) +ylab(expression("Log("*beta[Sim]*")"))+ 
+  xlab(expression("Log("*beta[Replacement]*")")) +ylab(expression(""*beta[Sim]*""))+ 
   theme_bw() +ggtitle("b)") +
   annotate("text", label = t2, x = 4.5, y = 0.03, size = 5, colour = "black")+
   theme(axis.title = element_text(size = 14), axis.text = element_text(size =12), 
         plot.title = element_text(size = 16))
 
 g2 <- ggplot(data=resM,aes(x=resM$BSJ,y=BSor))+ geom_point()+
-  xlab(expression("Log("*beta[Stan]*")")) +ylab(expression("Log("*beta[Sor]*")"))+ 
+  xlab(expression(""*beta[Stan]*"")) +ylab(expression(""*beta[Sor]*""))+ 
   theme_bw()+ggtitle("c)") +
   annotate("text", label = t3, x = 0.8, y = 0.35, size = 5, colour = "black")+
   theme(axis.title = element_text(size = 14), axis.text = element_text(size =12), 
@@ -58,6 +58,7 @@ colnames(resM2) <- c(expression(""*beta[Total]*""), expression(""*beta[Nestednes
                      expression(""*beta[Sne]*""), expression("NODF"),
                      expression(""*beta[Stan]*""))
 
+##see the ReadMe file on the GitHub repo for a note about ggpairs and calculating Kendall correlations
 g5 <- GGally::ggpairs(resM2, labeller = label_parsed, axisLabels="none", 
                       upper = list("cor")) +theme_bw() + theme(strip.text = element_text(size = 14))
 
