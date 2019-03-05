@@ -1,6 +1,7 @@
 # Partitioning-additive-beta
 
 [![DOI](https://zenodo.org/badge/167363516.svg)](https://zenodo.org/badge/latestdoi/167363516)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Data and code accompanying the paper: Can additive beta-diversity be reliably partitioned into nestedness and turnover components? (In Review)
 
