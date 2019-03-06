@@ -42,14 +42,14 @@ betD <- function(dat){
   res <- c(round(betA,2),round(bnst,2),round(brpl,2))
   
   ##run beta function in betapart
-  BD <- unlist(betapart::beta.multi(dat3, index.family="sorensen")) #first is turn, 2nd is nest, 3rd is overall
-  BDJ <- unlist(betapart::beta.multi(dat3, index.family="jaccard")) #first is turn, 2nd is nest, 3rd is overall
+  BD <- unlist(betapart::beta.multi(dat, index.family="sorensen")) #first is turn, 2nd is nest, 3rd is overall
+  BDJ <- unlist(betapart::beta.multi(dat, index.family="jaccard")) #first is turn, 2nd is nest, 3rd is overall
   
   #use Carvalho method
-  BCAR <-  unlist(BAT::beta.multi(dat3)[,1])#first is total, second replacement, third richness
+  BCAR <-  unlist(BAT::beta.multi(dat)[,1])#first is total, second replacement, third richness
   
   #get NODF
-  ND <- unlist(vegan::nestednodf(dat3)$statistic) #first is by cols, second by rows, third is overall
+  ND <- unlist(vegan::nestednodf(dat)$statistic) #first is by cols, second by rows, third is overall
   
   ov_res <- round(c("BTotal" = res[1], "BNes" = res[2], "BRpl" = res[3],
                     "BMult" = BW, "BSor" = BD[3], "BSIM" = BD[1], "BNes[Baselga]" = BD[2], "NODF_Overall" = ND[3], 
@@ -83,7 +83,7 @@ get_beta <- function(ldf, rn = NULL, cor_method = "kendall"){
                         "JacNes", "CarvTot", "CarvRplc", "CarvRich")
   
   for (i in 1:length(ldf)){
-    resM[i, 1:20] <- betD(ldf[[i]])
+    resM[i, 1:18] <- betD(ldf[[i]])
   }
   
   resM <- as.data.frame(resM)

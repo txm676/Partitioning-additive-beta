@@ -1,14 +1,15 @@
 
 source("//Source_code.R") #load in the source code file
 
-#load in the datafiles as a list (called "incidence_matrices.R")
-#the loaded object is a list of length 254, where each element is a 
+#load in the datafiles as a list (called "incidence_matrices.RData")
+#the loaded object (ldf) is a list of length 254, where each element is a 
 #incidence (presence-absence matrix), where rows are sites and
 #species are columns
 load()
 
 ##run main function for all datasets
-resAll <- get_beta(ldf, rn = c(fileNames, fileNames2), cor_method = "kendall")
+fn <- names(ldf)
+resAll <- get_beta(ldf, rn = fn, cor_method = "kendall")
 resM <- resAll[[1]] 
 resC <- resAll[[2]] %>% round(2) ##correlation results
 
