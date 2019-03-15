@@ -12,4 +12,4 @@ simply the incidence data), allowing for the reproduction of the analyses in the
 
 The script makes use of the ggpairs function from the GGally R package. However, we were unable to get this function to compute Kendall's correlation (it seems to only calculate Pearson's, at least at this time). We forked the GGally package and edited the function to do this. Thus, to directly reproduce Fig.S1 in the appendix of the paper it is necessary to download the forked version of GGally from my GitHub. 
 
-The GitHub repository has been archived on the Zenodo research data repository (DOI: 10.5281/zenodo.2580168).
+The GitHub repository has been archived on the Zenodo research data repository (DOI: 10.5281/zenodo.2595322).
