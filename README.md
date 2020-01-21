@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2595322.svg)](https://doi.org/10.5281/zenodo.2595322)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Data and code accompanying the paper: Can additive beta-diversity be reliably partitioned into nestedness and turnover components? Global Ecology & Biogeography (Accepted)
+Data and code accompanying the paper: Matthews et al. (2019) Can additive beta-diversity be reliably partitioned into nestedness and turnover components? Global Ecology & Biogeography, 28, 1146-1154.
 
 The R scripts can be used to run the analyses in the paper. The data are available in the data folder and comprise the 254 island incidence (presence-absence) matrices used in the paper. Here, rows are sites and columns are species. The matrices are available as csv files (in the zip file) or as an RData object (matrices stored in a list called 'ldf'). The references of the source papers are provided in a csv file titled "Incidence_matrices.csv". 
 
